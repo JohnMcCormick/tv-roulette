@@ -1,18 +1,17 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
+const fs = require('fs');
 require('dotenv').config()
 
 const port = process.env.PORT || 3001;
 
 const TVDBApiKey = process.env.API_KEY;
 const TVDBUrl = 'https://api4.thetvdb.com/v4/';
-console.log(TVDBApiKey)
 
-let { token: bearerToken } = require('./data/tvdb-bearer-token.json');
+let bearerToken = null;
 
 const getBearerToken = async () => {
-  console.log('Fetching new bearer token')
   let response = await fetch(`${TVDBUrl}login`, {
     method: "POST",
     headers: {
@@ -22,7 +21,7 @@ const getBearerToken = async () => {
   })
   let { status, data } = await response.json()
   let { token } = data;
-  console.log(token);
+
   bearerToken = token;
 }
 
@@ -86,12 +85,10 @@ const getDefaultSeasons = async (showId) => {
 
 app.get("/select", async (req, res) => {
   let showId = req.query.id;
-  console.log(`Show id: ${showId}`)
   
   let defaultSeasons = await getDefaultSeasons(showId);
   
   let numSeasons = defaultSeasons.length;
-  console.log(`Number of seasons ${numSeasons}`)
   let seasonIndex = Math.floor(Math.random() * numSeasons);
 
   let seasonId = defaultSeasons[seasonIndex].id;
@@ -114,10 +111,7 @@ app.get("/select", async (req, res) => {
 const server = app.listen(port, async () => {
   console.log(`Example app listening on port ${port}!`)
 
-  if (bearerToken) console.log(bearerToken)
-  else {
-    await getBearerToken();
-  }
+  if (!bearerToken) await getBearerToken();
 });
 
 server.keepAliveTimeout = 120 * 1000;
