@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const fs = require('fs');
 require('dotenv').config()
 
 const port = process.env.PORT || 3001;
@@ -25,18 +24,6 @@ const getBearerToken = async () => {
   bearerToken = token;
 }
 
-const searchShow = async (show) => {
-  let response = await fetch(`${TVDBUrl}search?query=${show}&limit=5`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${bearerToken}`,
-    },
-  })
-  let { status, data } = await response.json()
-  return data;
-}
-
 var corsOptions = {
   origin: ['http://localhost:5173', 'https://tv-roulette.onrender.com'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -58,7 +45,6 @@ app.get("/search", async (req, res) => {
     },
   })
   let { status, data } = await response.json()
-  console.log(status, data);
   res.json({ "shows": data })
 })
 
@@ -78,7 +64,6 @@ const getDefaultSeasons = async (showId) => {
   let { status, data } = await getExtendedSeriesData(showId);
   let { defaultSeasonType, seasons } = data;
   let defaultSeasons = seasons.filter(season => season.type.id === defaultSeasonType).filter(season => season.number > 0);
-  // console.log(defaultSeasons);
 
   return defaultSeasons;
 }
