@@ -37,7 +37,7 @@ app.get("/api", (req, res) => {
 
 app.get("/search", async (req, res) => {
   let show = req.query.show;
-  let response = await fetch(`${TVDBUrl}search?query=${show}&limit=5`, {
+  let response = await fetch(`${TVDBUrl}search?query=${show}&type=series&limit=5`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
