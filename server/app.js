@@ -1,12 +1,17 @@
 const express = require("express");
 const app = express();
-const cors = require('cors');
+
 require('dotenv').config()
 
 const port = process.env.PORT || 3001;
 
 const TVDBApiKey = process.env.API_KEY;
 const TVDBUrl = 'https://api4.thetvdb.com/v4/';
+
+
+app.get("/api", (req, res) => {
+  res.json({ "shows": [{"name": "The Sopranos", "tvdb_id": 75299}, {"name": "Mad Men", "tvdb_id": 80337}, {"name": "Friends", "tvdb_id": 79168}] })
+})
 
 let bearerToken = null;
 
@@ -24,18 +29,11 @@ const getBearerToken = async () => {
   bearerToken = token;
 }
 
-var corsOptions = {
-  origin: ['http://localhost:5173', 'https://tv-roulette.onrender.com'],
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-app.use(cors(corsOptions))
-
 app.get("/api", (req, res) => {
   res.json({ "shows": [{"name": "The Sopranos", "tvdb_id": 75299}, {"name": "Mad Men", "tvdb_id": 80337}, {"name": "Friends", "tvdb_id": 79168}] })
 })
 
-app.get("/search", async (req, res) => {
+app.get("/api/search", async (req, res) => {
   let show = req.query.show;
   let response = await fetch(`${TVDBUrl}search?query=${show}&type=series&limit=5`, {
     method: "GET",
@@ -68,7 +66,7 @@ const getDefaultSeasons = async (showId) => {
   return defaultSeasons;
 }
 
-app.get("/select", async (req, res) => {
+app.get("/api/select", async (req, res) => {
   let showId = req.query.id;
   
   let defaultSeasons = await getDefaultSeasons(showId);
@@ -92,6 +90,8 @@ app.get("/select", async (req, res) => {
   let episodeIndex = Math.floor(Math.random() * numEpisodes)
   res.json({ "seasonNumber": seasonIndex + 1, "episodeNumber": episodeIndex + 1, "data": episodes[episodeIndex] })
 })
+
+app.use('/', express.static('client/dist'))
 
 const server = app.listen(port, async () => {
   console.log(`Example app listening on port ${port}!`)
