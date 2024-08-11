@@ -60,7 +60,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen p-10 text-center">
+    <div className="min-h-screen p-10 text-center max-w-xl m-auto">
       {isLoading ? (
         <Loading prompt="Getting Episode" />
       ) : selectedEpisode ? (
