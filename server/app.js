@@ -94,7 +94,7 @@ app.get("/api/select", async (req, res) => {
 app.use('/', express.static('client/dist'))
 
 const server = app.listen(port, async () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`App listening on port ${port}!`)
 
   if (!bearerToken) await getBearerToken();
 });
