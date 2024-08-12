@@ -27,18 +27,20 @@ const Episode = ({
           <span className="text-l text-white">{overview}</span>
         </div>
       </div>
-      <button
-        className="rounded-md my-2 py-2 bg-slate-950 text-white"
-        onClick={handleReroll}
-      >
-        Re-roll
-      </button>
-      <button
-        className="rounded-md my-2 py-2 bg-slate-950 text-white"
-        onClick={handleGoBack}
-      >
-        Go back
-      </button>
+      <div className="flex flex-col max-w-xs m-auto">
+        <button
+          className="rounded-md my-2 py-2 bg-slate-950 text-white hover:bg-black px-10"
+          onClick={handleReroll}
+        >
+          Re-roll
+        </button>
+        <button
+          className="rounded-md my-2 py-2 bg-slate-950 text-white hover:bg-black px-10"
+          onClick={handleGoBack}
+        >
+          Go back
+        </button>
+      </div>
     </div>
   );
 };

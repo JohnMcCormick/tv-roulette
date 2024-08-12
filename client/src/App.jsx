@@ -67,7 +67,7 @@ function App() {
       <div className="p-5 bg-slate-950">
         <span className="text-4xl text-white font-semibold">TV Roulette</span>
       </div>
-      <div className="max-w-xl m-auto pt-5 pb-7">
+      <div className="max-w-md m-auto pt-5 pb-7">
         {isLoading ? (
           <Loading prompt={rerolling ? "Re-rolling" : "Getting episode"} />
         ) : selectedEpisode ? (

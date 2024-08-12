@@ -21,7 +21,7 @@ const Search = ({ shows, searchInput, setSearchInput, handleSelect,  }) => {
               <div
                 key={index}
                 onClick={() => handleSelect(tvdb_id)}
-                className="rounded-md my-3 py-2 bg-slate-950 cursor-pointer"
+                className="rounded-md my-3 py-2 bg-slate-950 cursor-pointer hover:bg-black"
               >
                 <span className="text-white">{name}</span>
               </div>
