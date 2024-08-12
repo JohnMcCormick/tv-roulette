@@ -61,8 +61,11 @@ function App() {
 
   return (
     <div className="min-h-screen p-10 text-center max-w-xl m-auto">
+      <div className="mb-5">
+        <span className="text-4xl text-white font-semibold">TV Roulette</span>
+      </div>
       {isLoading ? (
-        <Loading prompt="Getting Episode" />
+        <Loading prompt="Getting episode" />
       ) : selectedEpisode ? (
         <Episode
           handleGoBack={handleGoBack}

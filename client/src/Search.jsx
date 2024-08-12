@@ -1,10 +1,6 @@
 const Search = ({ shows, searchInput, setSearchInput, handleSelect,  }) => {
   return (
     <>
-      <div className="mb-5">
-        <span className="text-3xl text-white">Search shows</span>
-      </div>
-
       <div className="flex flex-col">
         <div>
           <div className="relative mt-2 mb-5 rounded-md shadow-sm">
@@ -13,8 +9,8 @@ const Search = ({ shows, searchInput, setSearchInput, handleSelect,  }) => {
               id="search"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              className="w-full rounded-md border-0 py-1.5 pl-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              placeholder="The Sopranos"
+              className="w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center"
+              placeholder="Search show"
             ></input>
           </div>
         </div>
