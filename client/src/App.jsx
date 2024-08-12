@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const fetchInitialShows = async () => {
-      let response = await fetch(`/api`);
+      let response = await fetch(`/api/tv`);
       let data = await response.json();
       let { shows } = data;
       setDefaultShows(shows);
@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const searchShows = async () => {
       if (searchInput.length >= 3) {
-        let response = await fetch(`/api/search?show=${searchInput}`);
+        let response = await fetch(`/api/tv/search?show=${searchInput}`);
         let data = await response.json();
         setShows(data.shows);
       } else {
@@ -42,7 +42,7 @@ function App() {
   const handleSelect = async (id, reroll = false) => {
     setRerolling(reroll);
     setIsLoading(true);
-    let response = await fetch(`/api/select?id=${id}`);
+    let response = await fetch(`/api/tv/select?id=${id}`);
     let data = await response.json();
     setSelectedEpisode(data);
     // setSearchInput('');
